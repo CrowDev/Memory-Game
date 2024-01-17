@@ -1,8 +1,6 @@
 <p>Memory Game</p>
 <div class="grid grid-cols-3">
   <ng-container *ngFor="let entry of entries">
-    <div class="w-[200px] h-[300px] relative">
-      <img class="object-cover" [ngSrc]="entry.fields.image.url" fill priority>
-    </div>
+    <app-card [entry]="entry" />
   </ng-container>
 </div>

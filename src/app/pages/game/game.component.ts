@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ImagesService } from '../../services/images.service';
 import { CommonModule } from '@angular/common';
-import { NgOptimizedImage } from '@angular/common'
 import { Entry, Result } from '../../@types';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, CardComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
