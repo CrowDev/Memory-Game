@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class FacadeService {
   currentSelectedCard: string | null = null;
   score = 0;
   error = 0;
+  errorSubject$ = new Subject<boolean>();
+  corrects: string[] = [];
 
   constructor() { }
 
@@ -24,14 +27,21 @@ export class FacadeService {
     if (this.countPlay === 2) {
       if (this.currentSelectedCard === uuid) {
         this.score += 1;
+        this.corrects.push(uuid);
       } else {
+        this.errorSubject$.next(true);
         this.error += 1;
       }
-      this.resetCounter();
+      this.resetStates();
     }
   }
 
-  resetCounter() {
+  resetStates() {
+    this.currentSelectedCard = null;
     this.countPlay = 0;
+  }
+
+  isWrong() {
+    return this.errorSubject$.asObservable();
   }
 }
