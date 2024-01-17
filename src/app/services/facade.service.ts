@@ -12,7 +12,9 @@ export class FacadeService {
   hit$ = new BehaviorSubject<number>(0);
   missed$= new BehaviorSubject<number>(0);
   errorSubject$ = new Subject<boolean>();
+  winSubject$ = new Subject<boolean>();
   corrects: string[] = [];
+  private maxCorrects = 0;
 
   constructor() { }
 
@@ -21,7 +23,15 @@ export class FacadeService {
       this.currentSelectedCard = uuid;
     }
     this.validatePlay(uuid);
+    if (this.isWin()) {
+      this.handleFinish();
+    }
   }
+
+  handleFinish() {
+    this.winSubject$.next(true);
+  }
+
 
   validatePlay(uuid: string) {
     this.countPlay += 1;
@@ -42,6 +52,14 @@ export class FacadeService {
   resetStates() {
     this.currentSelectedCard = null;
     this.countPlay = 0;
+  }
+
+  setMaxCorrects(maxCorrects: number) {
+    this.maxCorrects = maxCorrects;
+  }
+
+  isWin() {
+    return this.corrects.length === this.maxCorrects;
   }
 
   isWrong() {
