@@ -9,10 +9,6 @@
   transition: transform 1s;
 }
 
-.card-container__card:hover {
-  transform: rotateY(180deg);
-}
-
 .card-container__cover, .card-container__content {
   backface-visibility: hidden;
 }
