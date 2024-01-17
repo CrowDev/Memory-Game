@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,9 @@ export class FacadeService {
 
   countPlay = 0;
   currentSelectedCard: string | null = null;
-  score = 0;
-  error = 0;
+
+  hit$ = new BehaviorSubject<number>(0);
+  missed$= new BehaviorSubject<number>(0);
   errorSubject$ = new Subject<boolean>();
   corrects: string[] = [];
 
@@ -26,11 +27,13 @@ export class FacadeService {
     this.countPlay += 1;
     if (this.countPlay === 2) {
       if (this.currentSelectedCard === uuid) {
-        this.score += 1;
+        const { value } = this.hit$;
+        this.hit$.next(value + 1);
         this.corrects.push(uuid);
       } else {
+        const { value } = this.missed$;
+        this.missed$.next(value + 1);
         this.errorSubject$.next(true);
-        this.error += 1;
       }
       this.resetStates();
     }
@@ -43,5 +46,13 @@ export class FacadeService {
 
   isWrong() {
     return this.errorSubject$.asObservable();
+  }
+
+  isHit() {
+    return this.hit$.asObservable();
+  }
+
+  isMissed () {
+    return this.missed$.asObservable();
   }
 }

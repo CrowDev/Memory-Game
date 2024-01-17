@@ -3,11 +3,12 @@ import { ImagesService } from '../../services/images.service';
 import { CommonModule } from '@angular/common';
 import { Entry, Result } from '../../@types';
 import { CardComponent } from '../../components/card/card.component';
+import { ScoreBoardComponent } from '../../components/score-board/score-board.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, ScoreBoardComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })

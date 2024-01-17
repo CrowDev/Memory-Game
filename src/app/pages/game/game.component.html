@@ -1,6 +1,8 @@
-<p>Memory Game</p>
-<div class="grid grid-cols-3 gap-5">
-  <ng-container *ngFor="let entry of entries">
-    <app-card [entry]="entry" />
-  </ng-container>
+<div>
+  <app-score-board />
+  <section class="grid grid-cols-3 gap-5">
+    <ng-container *ngFor="let entry of entries">
+      <app-card [entry]="entry" />
+    </ng-container>
+  </section>
 </div>
