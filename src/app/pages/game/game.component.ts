@@ -23,8 +23,12 @@ export class GameComponent implements OnInit {
 
   fetchImages() {
     this.imagesService.getImages().subscribe((data: Result) => {
-      console.log(data);
-      this.entries = data.entries;
+      this.handleFetchedImages(data.entries);
     }, (error) => console.log(error));
+  }
+
+  handleFetchedImages(entries: Entry[]) {
+    const duplicateEntries = () => entries.concat([...entries])
+    this.entries = duplicateEntries().sort(() => Math.random() - 0.5);
   }
 }
