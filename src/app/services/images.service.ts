@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Result } from '../@types';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,6 @@ export class ImagesService {
   constructor(private httpClient: HttpClient) { }
 
   getImages() {
-    return this.httpClient.get(this.API_URL);
+    return this.httpClient.get<Result>(this.API_URL);
   }
 }
