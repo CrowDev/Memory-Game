@@ -31,6 +31,11 @@ export class CardComponent implements OnInit, OnDestroy {
         this.revealed = false;
       }
     });
+    this.subscriptions.add(
+      this.facadeService.isGameRestarted().subscribe((isRestarted: boolean) => {
+        this.revealed = false;
+      }),
+    );
   }
 
   handleClick() {

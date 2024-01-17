@@ -13,6 +13,7 @@ export class FacadeService {
   missed$= new BehaviorSubject<number>(0);
   errorSubject$ = new Subject<boolean>();
   winSubject$ = new Subject<boolean>();
+  gameRestarted$ = new Subject<boolean>();
   corrects: string[] = [];
   private maxCorrects = 0;
 
@@ -54,6 +55,22 @@ export class FacadeService {
     this.countPlay = 0;
   }
 
+  resetScores() {
+    this.hit$.next(0);
+    this.missed$.next(0);
+  }
+
+  resetCorrects() {
+    this.corrects = [];
+  }
+
+  restartGame() {
+    this.resetStates();
+    this.resetScores();
+    this.winSubject$.next(false);
+    this.gameRestarted$.next(true);
+  }
+
   setMaxCorrects(maxCorrects: number) {
     this.maxCorrects = maxCorrects;
   }
@@ -72,5 +89,9 @@ export class FacadeService {
 
   isMissed () {
     return this.missed$.asObservable();
+  }
+
+  isGameRestarted() {
+    return this.gameRestarted$.asObservable();
   }
 }

@@ -1,4 +1,8 @@
 <div>
+  <app-congrats
+    [showCongrats]="gameFinished"
+    (onNewGame)="handleNewGame()"
+    />
   <app-score-board />
   <section class="grid grid-cols-3 gap-5">
     <ng-container *ngFor="let entry of entries">

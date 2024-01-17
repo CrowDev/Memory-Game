@@ -5,17 +5,24 @@ import { Entry, Result } from '../../@types';
 import { CardComponent } from '../../components/card/card.component';
 import { ScoreBoardComponent } from '../../components/score-board/score-board.component';
 import { FacadeService } from '../../services/facade.service';
+import { CongratsComponent } from '../../components/congrats/congrats.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, CardComponent, ScoreBoardComponent],
+  imports: [
+    CommonModule,
+    CardComponent,
+    ScoreBoardComponent,
+    CongratsComponent
+  ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
 export class GameComponent implements OnInit {
 
   entries: Entry[] = [];
+  gameFinished = false;
 
   constructor(private imagesService: ImagesService, private facadeService: FacadeService) {}
 
@@ -23,6 +30,7 @@ export class GameComponent implements OnInit {
     this.fetchImages();
     this.facadeService.winSubject$.subscribe((win: boolean) => {
       //TODO: handle win
+      this.gameFinished = win;
     });
   }
 
@@ -36,5 +44,9 @@ export class GameComponent implements OnInit {
     this.facadeService.setMaxCorrects(entries.length);
     const duplicateEntries = () => entries.concat([...entries])
     this.entries = duplicateEntries().sort(() => Math.random() - 0.5);
+  }
+
+  handleNewGame() {
+    this.facadeService.restartGame();
   }
 }
