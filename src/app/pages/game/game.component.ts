@@ -24,26 +24,10 @@ export class GameComponent implements OnInit {
   entries: Entry[] = [];
   gameFinished = false;
 
-  constructor(private imagesService: ImagesService, private facadeService: FacadeService) {}
+  constructor(private facadeService: FacadeService) {}
 
   ngOnInit(): void {
-    this.fetchImages();
-    this.facadeService.winSubject$.subscribe((win: boolean) => {
-      //TODO: handle win
-      this.gameFinished = win;
-    });
-  }
-
-  fetchImages() {
-    this.imagesService.getImages().subscribe((data: Result) => {
-      this.handleFetchedImages(data.entries);
-    }, (error) => console.log(error));
-  }
-
-  handleFetchedImages(entries: Entry[]) {
-    this.facadeService.setMaxCorrects(entries.length);
-    const duplicateEntries = () => entries.concat([...entries])
-    this.entries = duplicateEntries().sort(() => Math.random() - 0.5);
+    this.facadeService.initGame();
   }
 
   handleNewGame() {

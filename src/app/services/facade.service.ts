@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { ImagesService } from './images.service';
+import { Entry, Result } from '../@types';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,34 @@ export class FacadeService {
   winSubject$ = new Subject<boolean>();
   gameRestarted$ = new Subject<boolean>();
   corrects: string[] = [];
+  entries: Entry[] = [];
   private maxCorrects = 0;
 
-  constructor() { }
+  constructor(private imagesService: ImagesService) { }
+
+  initGame() {
+    this.fetchImages();
+  }
+
+  fetchImages() {
+    this.imagesService.getImages().subscribe((data: Result) => {
+      this.handleFetchedImages(data.entries);
+    }, (error) => console.log(error));
+  }
+
+  handleFetchedImages(entries: Entry[]) {
+    this.setMaxCorrects(entries.length);
+    const duplicatedEntries = this.duplicateEntries(entries);
+    this.entries = this.shuffleCards(duplicatedEntries);
+  }
+
+  duplicateEntries(entries: Entry[]) {
+    return entries.concat([...entries])
+  }
+
+  shuffleCards(entries: Entry[]) {
+    return entries.sort(() => Math.random() - 0.5);
+  }
 
   handlePlay(uuid: string) {
     if (!this.currentSelectedCard) {
