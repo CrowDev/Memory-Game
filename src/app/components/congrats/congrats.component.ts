@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FacadeService } from '../../services/facade.service';
 
 @Component({
   selector: 'app-congrats',
@@ -16,8 +17,13 @@ export class CongratsComponent {
   @Output()
   onNewGame = new EventEmitter();
 
+  constructor(private facadeService: FacadeService) {}
+
   handleNewGame() {
     this.onNewGame.emit();
   }
 
+  get user() {
+    return this.facadeService.getUser();
+  }
 }
