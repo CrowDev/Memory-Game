@@ -95,8 +95,11 @@ export class FacadeService {
   restartGame() {
     this.resetStates();
     this.resetScores();
+    this.resetCorrects();
     this.winSubject$.next(false);
     this.gameRestarted$.next(true);
+    const shuffledEntries = this.shuffleCards(this.entries$.value);
+    this.entries$.next(shuffledEntries);
   }
 
   setMaxCorrects(maxCorrects: number) {
