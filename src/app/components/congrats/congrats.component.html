@@ -1,8 +1,10 @@
 <div class="overlay" *ngIf="showCongrats">
-  <div class="p-10 font-semibold text-white rounded-lg shadow-2xl shadow-violet-700 bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
-    <p>
-    Congrats, {{user}}!
+  <div class="p-10 w-1/3 font-semibold text-white rounded-lg shadow-xl shadow-violet-900 bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:25px_20px] flex flex-col gap-5">
+    <p class="text-2xl text-center">
+    Congrats, <span class="text-3xl font-bold">{{user}}!</span>
     </p>
-    <button type="button" class="text-sky-500" (click)="handleNewGame()">New Game</button>
+    <div class="self-center">
+      <button type="button" class="text-center text-sky-500 hover:text-indigo-200 transition-colors" (click)="handleNewGame()">New Game</button>
+    </div>
   </div>
 </div>
