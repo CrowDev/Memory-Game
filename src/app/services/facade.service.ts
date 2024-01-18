@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ImagesService } from './images.service';
-import { Entry, Result } from '../@types';
+import { Card, Entry, Result } from '../@types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Entry, Result } from '../@types';
 export class FacadeService {
 
   countPlay = 0;
-  currentSelectedCard: string | null = null;
+  currentSelectedCard: Card | null = null;
 
   hit$ = new BehaviorSubject<number>(0);
   missed$ = new BehaviorSubject<number>(0);
@@ -48,11 +48,11 @@ export class FacadeService {
     return entries.sort(() => Math.random() - 0.5);
   }
 
-  handlePlay(uuid: string) {
+  handlePlay(card: Card) {
     if (!this.currentSelectedCard) {
-      this.currentSelectedCard = uuid;
+      this.currentSelectedCard = card;
     }
-    this.validatePlay(uuid);
+    this.validatePlay(card);
     if (this.isWin()) {
       this.handleFinish();
     }
@@ -63,13 +63,16 @@ export class FacadeService {
   }
 
 
-  validatePlay(uuid: string) {
+  validatePlay(card: Card) {
+    if (this.countPlay === 1 && this.currentSelectedCard?.index === card.index) {
+      return;
+    }
     this.countPlay += 1;
     if (this.countPlay === 2) {
-      if (this.currentSelectedCard === uuid) {
+      if (this.currentSelectedCard?.index !== card.index && this.currentSelectedCard?.uuid === card.uuid) {
         const { value } = this.hit$;
         this.hit$.next(value + 1);
-        this.corrects.push(uuid);
+        this.corrects.push(card.uuid);
       } else {
         const { value } = this.missed$;
         this.missed$.next(value + 1);

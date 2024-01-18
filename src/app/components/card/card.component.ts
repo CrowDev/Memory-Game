@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Entry } from '../../@types';
+import { Card, Entry } from '../../@types';
 import { FacadeService } from '../../services/facade.service';
 import { animation } from '../../util/animation';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() entry!: Entry;
+  @Input() index!: number;
   uuid: string = '';
   revealed = false;
   isBlocked = false;
@@ -55,7 +56,11 @@ export class CardComponent implements OnInit, OnDestroy {
   handleClick() {
     if (this.isBlocked) return;
     this.revealed = true;
-    this.facadeService.handlePlay(this.uuid);
+    const card: Card = {
+      uuid: this.uuid,
+      index: this.index
+    };
+    this.facadeService.handlePlay(card);
   }
 
   isCurrentCardCorrect() {
