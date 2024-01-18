@@ -102,6 +102,18 @@ export class FacadeService {
     this.entries$.next(shuffledEntries);
   }
 
+  storeUser(user: string) {
+    localStorage.setItem('user', user);
+  }
+
+  getUser() {
+    return localStorage.getItem('user');
+  }
+
+  isUserStored() {
+    return !!this.getUser();
+  }
+
   setMaxCorrects(maxCorrects: number) {
     this.maxCorrects = maxCorrects;
   }

@@ -1,4 +1,4 @@
-<div class="overlay">
+<div class="overlay" *ngIf="showDialog">
   <section class="p-5 rounded-lg shadow-2xl bg-violet-950 shadow-violet-500">
     <form [formGroup]="form" (submit)="onSubmit()" class="flex flex-col gap-2">
       <label class="font-semibold text-white">Enter your name</label>
