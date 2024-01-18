@@ -74,3 +74,8 @@ export enum ContentType {
             current_page:  number;
             total_pages:   number;
           }
+
+export type Card = {
+  uuid: string;
+  index: number;
+}
