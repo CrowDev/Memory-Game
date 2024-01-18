@@ -23,6 +23,13 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.facadeService.initGame();
+    this.initListener();
+  }
+
+  initListener() {
+    this.facadeService.isGameFinished().subscribe((finished: boolean) => {
+      this.gameFinished = finished;
+    });
   }
 
   handleNewGame() {

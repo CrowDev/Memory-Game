@@ -126,4 +126,8 @@ export class FacadeService {
   isGameRestarted() {
     return this.gameRestarted$.asObservable();
   }
+
+  isGameFinished() {
+    return this.winSubject$.asObservable();
+  }
 }
