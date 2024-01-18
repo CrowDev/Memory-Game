@@ -34,5 +34,6 @@ export class UserDialogComponent implements OnInit {
   onSubmit() {
     const { name } = this.form.value;
     this.facadeService.storeUser(name);
+    this.showDialog = false;
   }
 }
