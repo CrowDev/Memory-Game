@@ -54,7 +54,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   handleClick() {
-    if (this.isBlocked) return;
+    if (this.isBlocked || this.isCurrentCardCorrect()) return;
     this.revealed = true;
     const card: Card = {
       uuid: this.uuid,
