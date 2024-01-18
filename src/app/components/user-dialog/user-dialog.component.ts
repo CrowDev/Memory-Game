@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserDialogComponent implements OnInit {
   showDialog = false;
+  isSubmitted = false;
   form!: FormGroup;
   constructor(private fb: FormBuilder, private facadeService: FacadeService) {
   }
@@ -34,6 +35,9 @@ export class UserDialogComponent implements OnInit {
   onSubmit() {
     const { name } = this.form.value;
     this.facadeService.storeUser(name);
-    this.showDialog = false;
+    this.isSubmitted = true;
+    setTimeout(() => {
+      this.showDialog = false;
+    }, 1000)
   }
 }
