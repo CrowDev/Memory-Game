@@ -12,12 +12,12 @@ export class FacadeService {
   currentSelectedCard: string | null = null;
 
   hit$ = new BehaviorSubject<number>(0);
-  missed$= new BehaviorSubject<number>(0);
+  missed$ = new BehaviorSubject<number>(0);
+  entries$ = new BehaviorSubject<Entry[]>([]);
   errorSubject$ = new Subject<boolean>();
   winSubject$ = new Subject<boolean>();
   gameRestarted$ = new Subject<boolean>();
   corrects: string[] = [];
-  entries: Entry[] = [];
   private maxCorrects = 0;
 
   constructor(private imagesService: ImagesService) { }
@@ -35,7 +35,8 @@ export class FacadeService {
   handleFetchedImages(entries: Entry[]) {
     this.setMaxCorrects(entries.length);
     const duplicatedEntries = this.duplicateEntries(entries);
-    this.entries = this.shuffleCards(duplicatedEntries);
+    const shuffledEntries = this.shuffleCards(duplicatedEntries);
+    this.entries$.next(shuffledEntries);
   }
 
   duplicateEntries(entries: Entry[]) {
@@ -100,6 +101,10 @@ export class FacadeService {
 
   setMaxCorrects(maxCorrects: number) {
     this.maxCorrects = maxCorrects;
+  }
+
+  getEntries() {
+    return this.entries$.asObservable();
   }
 
   isWin() {

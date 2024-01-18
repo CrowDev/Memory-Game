@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { Entry } from '../../@types';
 import { FacadeService } from '../../services/facade.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -13,6 +14,23 @@ import { FacadeService } from '../../services/facade.service';
 })
 export class BoardComponent {
   entries: Entry[] = [];
+  subscription!: Subscription;
 
   constructor(private facadeService: FacadeService) {}
+
+  ngOnInit(): void {
+    this.initListener();
+  }
+
+  initListener() {
+    this.subscription = this.facadeService.getEntries().subscribe((entries: Entry[]) => {
+      this.entries = entries;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }
