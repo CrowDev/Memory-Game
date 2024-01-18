@@ -17,6 +17,7 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() entry!: Entry;
   uuid: string = '';
   revealed = false;
+  isBlocked = false;
   subscriptions!: Subscription;
 
   constructor(private facadeService: FacadeService) {}
@@ -40,6 +41,11 @@ export class CardComponent implements OnInit, OnDestroy {
         }
       }),
     );
+    this.subscriptions.add(
+      this.facadeService.areActionsBlocked().subscribe((isBlocked: boolean) => {
+        this.isBlocked = isBlocked;
+      })
+    );
   }
 
   setUuid() {
@@ -47,6 +53,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   handleClick() {
+    if (this.isBlocked) return;
     this.revealed = true;
     this.facadeService.handlePlay(this.uuid);
   }

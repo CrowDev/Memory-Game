@@ -16,6 +16,7 @@ export class FacadeService {
   entries$ = new BehaviorSubject<Entry[]>([]);
   errorSubject$ = new Subject<boolean>();
   winSubject$ = new Subject<boolean>();
+  blockActions$ = new Subject<boolean>();
   gameRestarted$ = new Subject<boolean>();
   corrects: string[] = [];
   private maxCorrects = 0;
@@ -72,7 +73,11 @@ export class FacadeService {
       } else {
         const { value } = this.missed$;
         this.missed$.next(value + 1);
-        this.errorSubject$.next(true);
+        this.blockActions$.next(true);
+        setTimeout(() => {
+          this.errorSubject$.next(true);
+          this.blockActions$.next(false);
+        }, 1000)
       }
       this.resetStates();
     }
@@ -124,6 +129,10 @@ export class FacadeService {
 
   isWin() {
     return this.corrects.length === this.maxCorrects;
+  }
+
+  areActionsBlocked() {
+    return this.blockActions$.asObservable();
   }
 
   isWrong() {
