@@ -1,5 +1,5 @@
-<div class="w-[200px] h-[300px] relative rounded-lg cursor-pointer card-container" (click)="handleClick()">
-  <div class="card-container__card" [@reveal]="revealed ? 'revealed' : 'not-revealed'">
+<div class="w-[200px] h-[300px] relative rounded-lg cursor-pointer card-container hover:-translate-y-5 transition-transform" (click)="handleClick()">
+  <div class="rounded-lg shadow-xl card-container__card shadow-indigo-900" [@reveal]="revealed ? 'revealed' : 'not-revealed'">
     <div class="card-container__cover">
       <div class="absolute inset-0 -z-10 h-full rounded-lg w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
     </div>
