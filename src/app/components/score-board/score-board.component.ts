@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FacadeService } from '../../services/facade.service';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './score-board.component.html',
   styleUrl: './score-board.component.css'
 })
-export class ScoreBoardComponent implements OnInit {
+export class ScoreBoardComponent implements OnInit, OnDestroy {
   wrongs = 0;
   hits = 0;
   subscription!: Subscription;
@@ -28,5 +28,11 @@ export class ScoreBoardComponent implements OnInit {
         this.hits = hits;
       }),
     );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
