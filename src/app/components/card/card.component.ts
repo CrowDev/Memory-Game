@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() entry!: Entry;
+  uuid: string = '';
   revealed = false;
   subscriptions!: Subscription;
 
@@ -22,30 +23,36 @@ export class CardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initListener();
+    this.setUuid();
   }
 
   initListener() {
     this.subscriptions= this.facadeService.isWrong().subscribe((isWrong: boolean) => {
+      if (this.isCurrentCardCorrect()) return;
       if (isWrong) {
-        if (this.isCurrentCardCorrect()) return;
         this.revealed = false;
       }
     });
     this.subscriptions.add(
       this.facadeService.isGameRestarted().subscribe((isRestarted: boolean) => {
-        this.revealed = false;
+        if (isRestarted) {
+          this.revealed = false;
+        }
       }),
     );
   }
 
+  setUuid() {
+    this.uuid = this.entry.fields.image.uuid;
+  }
+
   handleClick() {
     this.revealed = true;
-    const uuid = this.entry.fields.image.uuid;
-    this.facadeService.handlePlay(uuid);
+    this.facadeService.handlePlay(this.uuid);
   }
 
   isCurrentCardCorrect() {
-    return this.facadeService.corrects.includes(this.entry.fields.image.uuid);
+    return this.facadeService.corrects.includes(this.uuid);
   }
 
   ngOnDestroy(): void {
