@@ -5,6 +5,7 @@ import { CongratsComponent } from '../../components/congrats/congrats.component'
 import { BoardComponent } from '../../components/board/board.component';
 import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
 import { Subscription } from 'rxjs';
+import { DifficultSelectorComponent } from '../../components/difficult-selector/difficult-selector.component';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +14,8 @@ import { Subscription } from 'rxjs';
     ScoreBoardComponent,
     CongratsComponent,
     BoardComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    DifficultSelectorComponent
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
