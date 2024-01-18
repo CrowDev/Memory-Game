@@ -1,0 +1,9 @@
+<div class="overlay">
+  <section class="p-5 rounded-lg shadow-2xl bg-violet-950 shadow-violet-500">
+    <form [formGroup]="form" (submit)="onSubmit()" class="flex flex-col gap-2">
+      <label class="font-semibold text-white">Enter your name</label>
+      <input formControlName="name" class="px-3 py-1 font-medium rounded-md outline-sky-600 outline-offset-1" />
+      <button type="submit" class="px-3 py-2 mt-2 font-medium text-white rounded-lg bg-sky-500 disabled:bg-gray-500 transition-colors" [disabled]="form.invalid">Submit</button>
+    </form>
+  </section>
+</div>

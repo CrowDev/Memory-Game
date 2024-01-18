@@ -3,6 +3,7 @@ import { ScoreBoardComponent } from '../../components/score-board/score-board.co
 import { FacadeService } from '../../services/facade.service';
 import { CongratsComponent } from '../../components/congrats/congrats.component';
 import { BoardComponent } from '../../components/board/board.component';
+import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
 
 @Component({
   selector: 'app-game',
@@ -10,7 +11,8 @@ import { BoardComponent } from '../../components/board/board.component';
   imports: [
     ScoreBoardComponent,
     CongratsComponent,
-    BoardComponent
+    BoardComponent,
+    UserDialogComponent
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
