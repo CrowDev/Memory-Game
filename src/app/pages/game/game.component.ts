@@ -30,7 +30,13 @@ export class GameComponent implements OnInit {
 
   initListener() {
     this.facadeService.isGameFinished().subscribe((finished: boolean) => {
-      this.gameFinished = finished;
+      if (!finished) {
+        this.gameFinished = finished;
+      } else {
+        setTimeout(() => {
+          this.gameFinished = finished;
+        }, 1000);
+      }
     });
   }
 
