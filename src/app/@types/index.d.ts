@@ -19,54 +19,35 @@ export type Image = {
   title:        string;
   alt_text:     null;
   description:  null;
-  content_type: ContentType;
-}
-
-export enum ContentType {
-  ImageJPEG = "image/jpeg",
+  content_type: string;
 }
 
   export type EntryMeta = {
     name:              string;
     slug:              string;
     tags:              any[];
-    type:              Type;
+    type:              string;
     uuid:              string;
-    space:             Space;
+    space:             string;
     author:            Author;
-    locale:            Locale;
+    locale:            string;
     excerpt:           string;
     private:           boolean;
     category:          null;
     segments:          any[];
-    created_at:        Date;
-    updated_at:        Date;
-    published_at:      Date;
+    created_at:        string;
+    updated_at:        string;
+    published_at:      string;
     unpublish_at:      null;
     version_type:      VersionType;
     category_name:     null;
     category_slug:     null;
-    available_locales: Locale[];
+    available_locales: string[];
   }
 
   export type Author = {
   }
 
-  export enum Locale {
-    Es = "es",
-  }
-
-    export enum Space {
-      Animals = "animals",
-    }
-
-      export enum Type {
-        Game = "game",
-      }
-
-        export enum VersionType {
-          Current = "current",
-        }
 
           export type ResultMeta = {
             total_entries: number;
