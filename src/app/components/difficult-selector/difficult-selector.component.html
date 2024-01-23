@@ -6,7 +6,7 @@
 
 
 <div class="overlay overlay--open" [class.overlay--close]="closingAnimation" *ngIf="showDialog">
-  <section class="py-5 px-10 w-1/4 rounded-lg shadow-2xl bg-[linear-gradient(90deg,hsla(260,100%,9%,1),hsla(261,73%,20%,1),_hsla(260,100%,9%,1)_100%)] shadow-indigo-900 relative">
+  <section class="py-5 px-10 w-10/12 md:w-1/4 rounded-lg shadow-2xl bg-[linear-gradient(90deg,hsla(260,100%,9%,1),hsla(261,73%,20%,1),_hsla(260,100%,9%,1)_100%)] shadow-indigo-900 relative">
     <div class="text-white font-semibold text-3xl">Select difficult</div>
     <ul class="py-5 flex flex-col gap-3">
       <li *ngFor="let difficult of difficulties" class="flex items-center gap-2">
