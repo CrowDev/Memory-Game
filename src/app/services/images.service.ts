@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Result } from '../@types';
 
@@ -7,11 +7,12 @@ import { Result } from '../@types';
 })
 export class ImagesService {
 
-  private readonly API_URL = 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20';
+  private readonly API_URL = 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries';
 
   constructor(private httpClient: HttpClient) { }
 
-  getImages() {
-    return this.httpClient.get<Result>(this.API_URL);
+  getImages(entries: number) {
+    const params = new HttpParams().set('per_page', entries.toString());
+    return this.httpClient.get<Result>(this.API_URL, {params});
   }
 }

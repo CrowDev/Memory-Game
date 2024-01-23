@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FacadeService } from '../../services/facade.service';
 
 @Component({
   selector: 'app-difficult-selector',
@@ -12,12 +13,14 @@ export class DifficultSelectorComponent {
   showDialog = false;
   closingAnimation = false;
   difficulties = [
-    {label: 'easy (10 cards)', value: 'easy'},
-    {label: 'medium (20 cards)', value: 'medium'},
-    {label: 'hard (30 cards)', value: 'hard'},
-    {label: 'very hard (40 cards)', value: 'very-hard'},
+    {label: 'easy (10 cards)', value: 5},
+    {label: 'medium (20 cards)', value: 10},
+    {label: 'hard (30 cards)', value: 15},
+    {label: 'very hard (40 cards)', value: 20},
   ];
-  selectedDifficult = 'easy';
+  selectedDifficult = 5;
+
+  constructor(private facadeService: FacadeService) {}
 
   toggleDialog() {
     if (!this.showDialog) {
@@ -31,8 +34,9 @@ export class DifficultSelectorComponent {
     }
   }
 
-  onDifficultChange(difficulty: string) {
+  onDifficultChange(difficulty: number) {
     this.selectedDifficult = difficulty;
     this.toggleDialog();
+    this.facadeService.initGame(difficulty);
   }
 }

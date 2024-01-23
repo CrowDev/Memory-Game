@@ -23,12 +23,12 @@ export class FacadeService {
 
   constructor(private imagesService: ImagesService) { }
 
-  initGame() {
-    this.fetchImages();
+  initGame(difficulty: number = 5) {
+    this.fetchImages(difficulty);
   }
 
-  fetchImages() {
-    this.imagesService.getImages().subscribe((data: Result) => {
+  fetchImages(difficulty: number) {
+    this.imagesService.getImages(difficulty).subscribe((data: Result) => {
       this.handleFetchedImages(data.entries);
     }, (error) => console.log(error));
   }
