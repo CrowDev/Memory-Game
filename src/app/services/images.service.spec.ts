@@ -23,7 +23,7 @@ describe('ImagesService', () => {
     const expectedResponse: Result = expectedImages;
     httpClientSpy.get.and.returnValue(of(expectedResponse));
 
-    service.getImages().subscribe({
+    service.getImages(20).subscribe({
       next: (images: Result) => {
         expect(images).withContext('expected result').toEqual(expectedResponse);
         done();
