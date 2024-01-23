@@ -26,6 +26,7 @@ export class FacadeService {
 
   initGame(difficulty: number = 5) {
     this.setDifficult(difficulty);
+    this.restartGame();
     this.fetchImages(difficulty);
   }
 
