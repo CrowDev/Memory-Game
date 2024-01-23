@@ -1,27 +1,59 @@
-# MemoryGame
+# Memory Game
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
+## Overview
 
-## Development server
+Memory Game is a classic card-matching game implemented in Angular 17 with TailwindCSS for a customizable UI.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Check the demo here: [Memory Game](http://modyo-memory-game.s3-website-us-east-1.amazonaws.com/)
 
-## Code scaffolding
+![Memory Game Screenshot](/src//assets/imgs/Screenshot.jpg)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- Facade pattern for clean component logic.
+- Customizable UI with TailwindCSS.
+- Vanilla CSS for specific animations.
+- Difficulty selector for different game levels.
+- Unit tests for application logic.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Project Structure
 
-## Running unit tests
+- `/src`: Main source code directory.
+  - `/app`: Application components and logic.
+    - `/@types`: Types for the application
+    -  `/components`: Components for the UI
+    -  `/pages`: Components for routing
+    -  `/services`: Fetching and logic for the application
+    -  `/util`: Files to use through the application
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+1. Clone the repository.
+2. Run `npm install`.
+3. Start the game with `npm start`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Usage
 
-## Further help
+- Visit `http://localhost:4200` in your browser.
+- Match cards to win the game.
+- Change difficulty level mid-game.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Code Structure
+
+The project follows the Facade pattern to maintain clean component logic. Additional animations are handled in `animation.ts` in `app/util` folder.
+
+## Design Choices
+
+TailwindCSS was chosen for its flexibility in creating a highly customizable UI, offering advantages over more restrictive frameworks like Bootstrap.
+
+## Troubleshooting
+
+If you face issues running the project in WSL2, try changing the port using `ng serve --port=4000`.
+
+## Future Features
+
+Planned "Profile" section to showcase records with different difficulties and scores.
+
+## Contact
+
+For questions or suggestions, reach out to [Hardy Aguilar](https://www.linkedin.com/in/hardyaguilar/).
