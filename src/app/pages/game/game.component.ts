@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScoreBoardComponent } from '../../components/score-board/score-board.component';
 import { FacadeService } from '../../services/facade.service';
 import { CongratsComponent } from '../../components/congrats/congrats.component';
 import { BoardComponent } from '../../components/board/board.component';
 import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -17,9 +18,10 @@ import { UserDialogComponent } from '../../components/user-dialog/user-dialog.co
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   gameFinished = false;
+  subscription!: Subscription;
 
   constructor(private facadeService: FacadeService) {}
 
@@ -29,7 +31,7 @@ export class GameComponent implements OnInit {
   }
 
   initListener() {
-    this.facadeService.isGameFinished().subscribe((finished: boolean) => {
+    this.subscription = this.facadeService.isGameFinished().subscribe((finished: boolean) => {
       if (!finished) {
         this.gameFinished = finished;
       } else {
@@ -42,5 +44,11 @@ export class GameComponent implements OnInit {
 
   handleNewGame() {
     this.facadeService.restartGame();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
