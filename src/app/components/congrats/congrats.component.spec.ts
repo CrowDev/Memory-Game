@@ -24,4 +24,15 @@ describe('CongratsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call getUser on facadeService', () => {
+    facadeService.getUser.and.returnValue('User');
+    expect(component.user).toBe('User');
+  });
+
+  it('should emit onNewGame when handleNewGame is called', () => {
+    spyOn(component.onNewGame, 'emit');
+    component.handleNewGame();
+    expect(component.onNewGame.emit).toHaveBeenCalled();
+  });
 });
