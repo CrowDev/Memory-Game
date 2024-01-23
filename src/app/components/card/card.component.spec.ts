@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
 import { FacadeService } from '../../services/facade.service';
 import { of } from 'rxjs';
-import * as expectedImages from '../../util/mock-data.json';
+import expectedImages from '../../util/mock-data.json';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -84,7 +84,7 @@ describe('CardComponent', () => {
 
   it('should set uuid', () => {
     component.entry = expectedImages.entries[0];
-    fixture.detectChanges();
+    component.setUuid();
     expect(component.uuid).toBe('f0753a4f-87b2-484d-aeb1-a22c3278cb50');
   });
 
