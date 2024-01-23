@@ -50,6 +50,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   setUuid() {
+    if (!this.entry?.fields?.image) return;
     this.uuid = this.entry.fields.image.uuid;
   }
 
