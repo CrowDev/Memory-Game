@@ -51,19 +51,22 @@ export class FacadeService {
   }
 
   handlePlay(card: Card) {
-    if (!this.currentSelectedCard) {
-      this.currentSelectedCard = card;
-    }
+    this.validateCurrentSelectedCard(card);
     this.validatePlay(card);
     if (this.isWin()) {
       this.handleFinish();
     }
   }
 
+  validateCurrentSelectedCard(card: Card) {
+    if (!this.currentSelectedCard) {
+      this.currentSelectedCard = card;
+    }
+  }
+
   handleFinish() {
     this.winSubject$.next(true);
   }
-
 
   validatePlay(card: Card) {
     if (this.isClickingExactSameCard(card)) {
