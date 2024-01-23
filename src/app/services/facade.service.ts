@@ -19,12 +19,23 @@ export class FacadeService {
   blockActions$ = new Subject<boolean>();
   gameRestarted$ = new Subject<boolean>();
   corrects: string[] = [];
+  currentDifficulty = 'easy';
   private maxCorrects = 0;
 
   constructor(private imagesService: ImagesService) { }
 
   initGame(difficulty: number = 5) {
+    this.setDifficult(difficulty);
     this.fetchImages(difficulty);
+  }
+
+  setDifficult(difficulty: number) {
+    const difficulties = new Map();
+    difficulties.set(5, 'easy');
+    difficulties.set(10, 'medium');
+    difficulties.set(15, 'hard');
+    difficulties.set(20, 'very hard');
+    this.currentDifficulty = difficulties.get(difficulty)
   }
 
   fetchImages(difficulty: number) {

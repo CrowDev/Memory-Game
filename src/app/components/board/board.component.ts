@@ -28,6 +28,10 @@ export class BoardComponent {
     });
   }
 
+  get currentDifficulty() {
+    return this.facadeService.currentDifficulty;
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
