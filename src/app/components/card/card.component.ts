@@ -68,6 +68,8 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
   }
 }
